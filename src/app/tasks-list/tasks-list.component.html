@@ -1,0 +1,21 @@
+<input type="button" (click)="addTask()" value="add Task">
+<div *ngIf="addingTaskBoolean">
+  <input #taskName type="text" placeholder="Task's name">
+  <input #taskDesciption type="text" placeholder="Task's description">
+  <input type="button" (click)=saveTask(taskName.value,taskDesciption.value) value="Save Task">
+  <input type="button" (click)="cancelTask()" value="cancel"> <br>
+  <div *ngIf="warnMessageBoolean">
+    {{warnMessage}}
+  </div>
+</div><br>
+<div><h3>Tasks</h3>
+<li *ngFor="let task of tasks">
+<div style="display: inline" (click)="selectTask(task)" >
+  {{task.id}}
+  {{task.name}}
+  <!--{{task.description}}--></div>
+
+    <input type="button" (click)="deleteTask(task)" value="Delete">
+</li><br>
+</div>
+<app-child-component *ngIf="showChildComponent" [task] = "selectedTask" (passTask) ="saveTheEditedTask($event)" (deleteThePassedTask)="deleteTask($event)"></app-child-component>
