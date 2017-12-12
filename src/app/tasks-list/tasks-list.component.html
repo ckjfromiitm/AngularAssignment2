@@ -13,7 +13,7 @@
 <li *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="selectTask(task)">
 <div style="display: inline"   >
   <span class="badge">{{task.id}}</span>
-  {{task.name}}
+  {{task.name | upperCaseConverter: task.name}}
   <!--{{task.description}}--></div>
 
     <!--<input type="button" (click)="deleteTask(task)" value="Delete">-->
