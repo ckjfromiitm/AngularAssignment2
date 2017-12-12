@@ -9,13 +9,15 @@
   </div>
 </div><br>
 <div><h3>Tasks</h3>
-<li *ngFor="let task of tasks">
-<div style="display: inline" (click)="selectTask(task)" >
-  {{task.id}}
+  <ul class="tasks">
+<li *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="selectTask(task)">
+<div style="display: inline"   >
+  <span class="badge">{{task.id}}</span>
   {{task.name}}
   <!--{{task.description}}--></div>
 
-    <input type="button" (click)="deleteTask(task)" value="Delete">
-</li><br>
+    <!--<input type="button" (click)="deleteTask(task)" value="Delete">-->
+</li></ul><br>
 </div>
-<app-child-component *ngIf="showChildComponent" [task] = "selectedTask" (passTask) ="saveTheEditedTask($event)" (deleteThePassedTask)="deleteTask($event)"></app-child-component>
+<div *ngIf="messageShowBoolean">{{messageShow}}</div>
+<app-child-component *ngIf="showChildComponent" [task] = "selectedTask" (passTask) ="saveTheEditedTask($event)" (deleteThePassedTask)="deleteTask($event)" (displayMessage)="displayMessage($event)"></app-child-component>

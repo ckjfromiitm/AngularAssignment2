@@ -1,5 +1,6 @@
-<div *ngIf="task" ><label>name</label><input type="text" #editedTaskName value ="{{task.name}}">
-  <label>description</label><input type="text" #editedTaskDescription value ="{{task.description}}"><br>
-  <input type="button" value="Save" (click)="saveTheEditedTask({id: task.id, name: editedTaskName.value, description: editedTaskDescription.value})">
+<div *ngIf="task" ><label>name</label><input type="text" (keyup)="disablingSaveButton(editedTaskName.value, editedTaskDescription.value)" #editedTaskName value ="{{task.name}}">
+  <label>description</label><input type="text" (keyup)="disablingSaveButton(editedTaskName.value, editedTaskDescription.value)" #editedTaskDescription value ="{{task.description}}">
+  <div style="display: inline"  *ngIf="empty">{{emptyErrorMessage}}</div> <br>
+  <input type="button" value="Save" [disabled]="disableSaveButto" (click)="saveTheEditedTask({id: task.id, name: editedTaskName.value, description: editedTaskDescription.value})">
   <input type="button" value="Delete" (click)="deleteTheSelectedTask(task)">
 </div>
